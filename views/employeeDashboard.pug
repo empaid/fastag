@@ -1,0 +1,51 @@
+extends layout 
+
+block content-without-container
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        .container-fluid
+            a.navbar-brand(href='#')
+                img(src='./assests/logo.png' width='200')
+            .d-flex
+                .navbar-nav
+                    a.btn.btn-secondary(href='/users/logout') Logout
+    if user.booth
+        .container
+            .h1.text-center.capitalize #{user.plaza.name}
+                div
+                | Toll Booth No #{user.booth.serial_no}
+            .input-group
+                .input-group-prepend
+                    span.input-group-text IP Address 
+                input#ip.form-control(type='text' value='192.168.43.165')
+                .input-group-prepend
+                    span.input-group-text Port
+                input#port.form-control(type='text' value='6789')
+                .input-group-append
+                    button#connect.btn.btn-primary(type='button') Connect
+            .alert.alert-success.mt-2(id='connected_status' role='alert' hidden)
+                | Connect to Raspberry Pi
+            .container.mt-5
+                form
+                    .form-group.row
+                        label.col-sm-2.col-form-label(for='vehicle_id') Vechile ID
+                        .col-sm-10
+                            input.form-control(type='text' id='vehicle_id' placeholder='' disabled)
+                    .form-group.row
+                        label.col-sm-2.col-form-label(for='vehicle_no') Vechile Number
+                        .col-sm-10
+                            input.form-control(type='text' id='vehicle_no' placeholder='' disabled)
+                    .form-group.row
+                        label.col-sm-2.col-form-label(for='vehicle_type') Vehicle Type
+                        .col-sm-10
+                            input.form-control(type='text' id='vehicle_type' placeholder='' disabled)
+                    .form-group.row
+                        label.col-sm-2.col-form-label(for='vehicle_balance') Vehicle Balance
+                        .col-sm-10
+                            input.form-control(type='text' id='vehicle_balance' placeholder='' disabled)
+            .alert.alert-success.mt-2(id='collection_type' role='alert' hidden)
+                | Toll Collected Automatically !!!!!
+            .alert.alert-info.mt-2(id='collection_amount' role='alert' hidden)
+            button.btn.btn-primary.mt-2(id='collect_cash' disabled) Collect Cash
+    else 
+        h1.text-center.mt-3 Not Assigned Toll Booth Yet!!!
+    script(src='./javascript/main.js')

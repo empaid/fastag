@@ -1,0 +1,53 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col-md-6.m-auto
+        .card
+            .card-body
+                a.btn.btn-warning.mb-4.btn-sm(href="/") 
+                    .i.fa.fa-long-arrow-left
+                    |  Back
+                include partials/messages.pug
+                form(action='/vehicle' method='POST')
+                    .d-grid.gap-2.mx-auto
+                        .form-floating
+                            input#vehicle_no.form-control(
+                                type='name' 
+                                name='vehicle_no' 
+                                placeholder='Enter Vechicle Number' 
+                                value = typeof(body.vehicle_no) && body.vehicle_no
+                            )
+                            label(for='name') Vehicle Number    
+                        .form-floating
+                            input#brand.form-control(
+                                type='name' 
+                                name='brand' 
+                                placeholder='Enter Vechicle Brand' 
+                                value = typeof(body.brand) && body.brand
+                            )
+                            label(for='name') Brand Name
+                        .form-floating
+                            input#model.form-control(
+                                type='name' 
+                                name='model' 
+                                placeholder='Enter Vechicle Model' 
+                                value = typeof(body.model) && body.model
+                            )
+                            label(for='model') Model Name
+                        .form-floating
+                            input#colour.form-control(
+                                type='name' 
+                                name='colour' 
+                                placeholder='Enter Vechicle Colour' 
+                                value = typeof(body.colour) && body.colour
+                            )
+                            label(for='model') Colour
+                        .input-group.mb-3
+                            label.input-group-text(for='inputGroupSelect01') Vehicle Type
+                            select#inputGroupSelect01.form-select(name = 'vehicle_type')
+                                option(selected) Choose...
+                                option(value='LMV') Light Motor Vehicle
+                                option(value='LCV') Light Commercial Vehicle
+                                option(value='HCV') Heavy Commercial Vehicle
+                        button.btn.btn-primary.btn-block(type='submit') Add Vehicle

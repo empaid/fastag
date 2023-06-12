@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col-md-6.m-auto.text-center
+        .card
+            .card-body
+                img.mb-4(src="/assests/logo.png", alt="", width="80%") 
+                include partials/messages.pug
+                form(action='/users/login' method='POST')
+                    .d-grid.gap-2.mx-auto
+                        .form-floating
+                            input#username.form-control(type='username' name='username' placeholder='Enter username')
+                            label(for='username') Username
+                        .form-floating
+                            input#password.form-control(type='password' name='password' placeholder='Enter Password')
+                            label(for='password') Password
+                        button(class="btn btn-lg btn-primary btn-block", type="submit") Login
+                .p.mt-3
+                    | No Account?
+                    a(href='/users/register')  Register

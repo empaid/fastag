@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col-md-6.m-auto
+        .card
+            .card-header.bg-primary.text-white
+                a.btn.btn-warning.btn-sm(href="/")   < Back
+                |     Top Up Vehicle Balance
+            .card-body
+                .d-grid.gap-2.mx-auto
+                    h1.card-title.text-captalize #{vehicle.colour} #{vehicle.brand} #{vehicle.model}
+                    h5.card-subtitle.text-muted
+                        if vehicle.vehicle_type == 'LMV' 
+                            | Light Motor Vehicle
+                        if vehicle.vehicle_type == 'LCV' 
+                            | Light Commercial Vehicle
+                        if vehicle.vehicle_type == 'HCV' 
+                            | Heavy Commercial Vehicle
+                    include partials/messages.pug
+                form(action='/vehicle/topup' method='POST')
+                    .d-grid.gap-2.mt-3
+                        .form-floating
+                            input(name='vehicle_id' value = vehicle.vehicle_id hidden)
+                            input#amount.form-control(
+                                type='number' 
+                                name='amount' 
+                                placeholder='Enter Amount To Add' 
+                            )
+                            label(for='amount') Amount   
+                        button.btn.btn-primary.btn-block(type='submit') Add Amount

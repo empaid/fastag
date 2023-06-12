@@ -1,0 +1,30 @@
+extends layout 
+
+block content-without-container
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        .container-fluid
+            a.navbar-brand(href='#')
+                img(src='./assests/logo.png' width='200')
+            .d-flex
+                .navbar-nav
+                    a.btn.btn-secondary(href='/users/logout') Logout
+    .py-5.text-center.container
+        include partials/messages.pug
+        .row
+            .col-lg-6.col-md-3.mx-auto
+                h2.fw-light Hello #{user.first_name} #{user.last_name} !!!!
+                ul.lead.list-unstyled.mt-3.mb-4.text-muted
+                    li Username: #{user.username}
+                    li Email: #{user.email}
+                    if user.driving_license_no
+                        li License Number: #{user.driving_license_no}
+                    if user.phone
+                        li Phone Number: #{user.phone}
+                .d-grid.gap-3.mx-auto
+                    a(class="btn btn-lg btn-primary btn-block", href="/tollPlaza") Add Toll Plaza
+                    a(class="btn btn-lg btn-primary btn-block", href="/employee") Add Employee
+                    a(class="btn btn-lg btn-primary btn-block", href="/manager") Assign/Change Manager at Toll Plaza
+                    a(class="btn btn-lg btn-primary btn-block", href="/tollPlaza/managers") View Toll Plaza And Manager
+                    a(class="btn btn-lg btn-primary btn-block", href="/tollPlaza/funds") View Funds at Toll Plaza
+            
+                    

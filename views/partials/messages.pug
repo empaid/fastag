@@ -1,0 +1,30 @@
+//- .alert.alert-danger.alert-dismissible.fade.show(role='alert', class="wow")
+//-     | hardik
+//-     button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
+//- .div Error Messages
+if locals.flashes
+    - const categories = Object.keys(locals.flashes)
+    each category in categories
+        each message in flashes[category]
+            - var alert_type = category
+            - if(alert_type == 'error') alert_type = 'danger'
+            .alert.alert-dismissible.fade.show(role='alert', class=`alert-${alert_type}`)
+                | #{message}
+                button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+//- each err in errors
+    .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+        | #{err.msg}
+        button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
+//- if locals.success_msg 
+//-     each success in locals.success_msg
+//-         .alert.alert-success.alert-dismissible.fade.show(role='alert')
+//-             | #{success}
+//-             button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
+//- if locals.error_msg
+//-     each error in locals.error_msg
+//-         .alert.alert-warning.alert-dismissible.fade.show(role='alert')
+//-             | #{error}
+//-             button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')

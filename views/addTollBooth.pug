@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col-md-6.m-auto
+        .card
+            .card-body
+                a.btn.btn-warning.mb-4.btn-sm(href="/") 
+                    .i.fa.fa-long-arrow-left
+                    |  Back
+                include partials/messages.pug
+                form(action='/tollBooth' method='POST')
+                    .d-grid.gap-2.mx-auto
+                        input(name="plaza_id", value = user.plaza.plaza_id hidden)
+                        .form-floating(disabled)
+                            input#plaza_name.form-control(
+                                type='name' 
+                                name='plaza_name' 
+                                placeholder='Plaza Name' 
+                                value = `${user.plaza.name}, ${user.plaza.city}, ${user.plaza.state}`
+                            )
+                            label(for='plaza_name') Toll Booth   
+                        .form-floating
+                            input#serial_no.form-control(
+                                type='number' 
+                                name='serial_no' 
+                                placeholder='Enter Serial Number' 
+                            )
+                            label(for='serial_no') Serial Number
+                        .input-group.mb-3
+                            label.input-group-text(for='inputGroupSelect01') Operator
+                            select#inputGroupSelect01.form-select(name = 'operator_id')
+                                option(value='0', selected) Choose...
+                                if employees
+                                    each employee in employees
+                                        option(value=employee.account_id) 
+                                            |   #{employee.first_name} #{employee.last_name}, #{employee.username}
+                        
+                        button.btn.btn-primary.btn-block(type='submit') Add Toll Plaza

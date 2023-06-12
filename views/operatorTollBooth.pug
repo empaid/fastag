@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col.m-auto
+        .card
+            .card-header.bg-primary.text-white
+                a.btn.btn-warning.btn-sm(href="/")   < Back
+                |     Toll Booth Operator
+            .card-body
+                .d-grid.gap-2.mx-auto
+                    if list.length
+                        table.table.table-bordered
+                            thead.text-center
+                                tr
+                                    th(scope='col' colspan="2") Toll Booth
+                                    th(scope='col' colspan="2") Operator
+                            thead.text-center
+                                tr
+                                    th(scope='col') Serial No.
+                                    th(scope='col') ID
+                                    th(scope='col') Name
+                                    th(scope='col') Email
+                            tbody
+                                each li in list
+                                    tr
+                                        th(scope="col") #{li.serial_no}
+                                        td #{li.booth_id}
+                                        td.text-captalize #{li.first_name} #{li.last_name}
+                                        th(scope='col') #{li.last_name}
+                                        
+                    else    
+                        h4.text-primary Empty List

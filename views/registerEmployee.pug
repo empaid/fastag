@@ -1,0 +1,84 @@
+extends layout 
+block content
+    .row.mt-5
+        .col-md-6.m-auto
+            .card
+                .card-body
+                    a.btn.btn-warning.mb-4.btn-sm(href="/") 
+                        .i.fa.fa-long-arrow-left
+                        |  < Back
+                    include partials/messages.pug
+                    form(action="/employee" method='POST')
+                        .d-grid.gap-2.mx-auto
+                            if user.account_type == 'admin'
+                                .input-group.mb-3
+                                    label.input-group-text(for='inputGroupSelect01') Toll Plaza
+                                    select#inputGroupSelect01.form-select(name = 'toll_plaza_id')
+                                        option(value='0', selected) Choose...
+                                        if toll_plazas 
+                                            each toll_plaza in toll_plazas
+                                                option(value=toll_plaza.plaza_id) 
+                                                    |   #{toll_plaza.name}, #{toll_plaza.city}, #{toll_plaza.state}
+                            else
+                                .input-group.mb-3
+                                    label.input-group-text(for='inputGroupSelect01') Toll Plaza
+                                    select#inputGroupSelect01.form-select.disabled(name = 'toll_plaza_id' readonly)
+                                        option(value=user.plaza.plaza_id) 
+                                            |   #{user.plaza.name}, #{user.plaza.city}, #{user.plaza.state}
+                            .form-floating
+                                input#username.form-control(
+                                    type='text' 
+                                    name='username' 
+                                    placeholder='Enter Username' 
+                                    value = typeof(body.username) && body.username
+                                )
+                                label(for='username') Username
+                            .form-floating
+                                input#first_name.form-control(
+                                    type='name' 
+                                    name='first_name' 
+                                    placeholder='Enter First Name' 
+                                    value = typeof(body.first_name) && body.first_name
+                                )
+                                label(for='first_name') First Name
+                            .form-floating
+                                input#last_name.form-control(
+                                    type='name' 
+                                    name='last_name' 
+                                    placeholder='Enter Last Name' 
+                                    value = typeof(body.last_name) && body.last_name
+                                )
+                                label(for='last_name') Last Name
+                            .form-floating
+                                input#salary.form-control(
+                                    type='text' 
+                                    name='salary' 
+                                    placeholder='Enter Salary' 
+                                    value = typeof(body.salary) && body.salary
+                                )
+                                label(for='salary') Salary
+                            .form-floating
+                                input#email.form-control(
+                                    type='email' 
+                                    name='email' 
+                                    placeholder='Enter Email' 
+                                    value = typeof(body.email) && body.email
+                                )
+                                label(for='email') Email
+                            .form-floating
+                                input#password.form-control(
+                                    type='password' 
+                                    name='password' 
+                                    placeholder='Create Password' 
+                                    value = typeof(body.password) && body.password 
+                                )
+                                label(for='password') Password
+                            .form-floating
+                                input#password2.form-control(
+                                    type='password' 
+                                    name='password2' 
+                                    placeholder='Confirm Password' 
+                                    value=typeof(body.password2) && body.password2 
+                                )
+                                label(for='password2') Confirm Password
+                            button.btn.btn-primary.btn-block(type='submit') Register Employee

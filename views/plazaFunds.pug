@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col.m-auto
+        .card
+            .card-header.bg-primary.text-white
+                a.btn.btn-warning.btn-sm(href="/")   < Back
+                |     Funds Holded By Plazas
+            .card-body
+                .d-grid.gap-2.mx-auto
+                    if list.length
+                        table.table.table-bordered
+                            thead.text-center
+                                tr
+                                    th(scope='col') Name
+                                    th(scope='col') City 
+                                    th(scope='col') Cash
+                                    th(scope='col') Online Funds
+                            tbody
+                                each li in list
+                                    tr
+                                        td.text-captalize #{li.name}
+                                        td #{li.city}
+                                        th(scope='col') #{li.online_funds}
+                                        th(scope='col') #{li.cash_holded}
+                                        
+                    else    
+                        h4.text-primary Empty List

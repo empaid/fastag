@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col.m-auto
+        .card
+            .card-header.bg-primary.text-white
+                a.btn.btn-warning.btn-sm(href="/")   < Back
+                |     Plaza Manager Table
+            .card-body
+                .d-grid.gap-2.mx-auto
+                    if manager_list.length
+                        table.table.table-bordered
+                            thead.text-center
+                                tr
+                                    th(scope='col', colspan="2") Plaza 
+                                    th(scope='col' colspan="3") Manager
+                            thead
+                                tr
+                                    th(scope='col') Name
+                                    th(scope='col') City 
+                                    th(scope='col') Name
+                                    th(scope='col') Username
+                                    th(scope='col') Email
+                            tbody
+                                each li in manager_list
+                                    tr
+                                        td.text-captalize #{li.plaza.name}
+                                        td #{li.plaza.city}
+                                        if li.manager
+                                            td.text-capitalize #{li.manager.first_name} #{li.manager.last_name}
+                                            td #{li.manager.username}
+                                            th(scope='row') #{li.manager.email}
+                                        else 
+                                            td(colspan="3").text-danger Not Yet Assigned
+                    else    
+                        h4.text-primary Empty List

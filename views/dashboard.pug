@@ -1,0 +1,56 @@
+extends layout 
+
+block content-without-container
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        .container-fluid
+            a.navbar-brand(href='#')
+                img(src='./assests/logo.png' width='200')
+            .d-flex
+                .navbar-nav
+                    a.btn.btn-secondary(href='/users/logout') Logout
+    .py-5.text-center.container
+        include partials/messages.pug
+        .row.py-lg-5
+            .col-lg-6.col-md-8.mx-auto
+                h2.fw-light Hello #{user.first_name} #{user.last_name} !!!!
+                ul.lead.list-unstyled.mt-3.mb-4.text-muted
+                    li Username: #{user.username}
+                    li Email: #{user.email}
+                    if user.driving_license_no
+                        li License Number: #{user.driving_license_no}
+                    if user.phone
+                        li Phone Number: #{user.phone}
+    .py-5.bg-light
+        .container
+            .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3.text-center
+                if user.vehicles
+                    each vehicle in user.vehicles
+                        .col
+                            .card.mb-4.rounded-3.shadow-sm
+                                .card-header.py-3
+                                    h4.my-0.fw-normal #{vehicle.vehicle_no}
+                                .card-body
+                                    h4.card-subtitle.mb-2.text-muted Balance
+                                    h1.card-title ₹#{vehicle.balance}
+                                    p.text-capitalize
+                                    | #{vehicle.colour}
+                                    | #{vehicle.brand}
+                                    | #{vehicle.model}
+                                    .p.text-muted
+                                        if vehicle.vehicle_type == 'LMV' 
+                                            small Light Motor Vehicle
+                                        if vehicle.vehicle_type == 'LCV' 
+                                            small Light Commercial Vehicle
+                                        if vehicle.vehicle_type == 'HCV' 
+                                            small Heavy Commercial Vehicle
+                                    a.w-100.btn.btn-lg.btn-primary.mt-3(href=`/vehicle/topup?vehicle_id=${vehicle.vehicle_id}`) Top Up
+                                    a.link(href=`/vehicle/history?vehicle_id=${vehicle.vehicle_id}`) Travel History
+                .col
+                    .card.mb-4.rounded-3.shadow-sm
+                        .card-body
+                            form(action="/vehicle", method="get")  
+                                button(class="btn btn-lg btn-outline-primary btn-block", type="submit")
+                                    h2
+                                        i.fas.fa-plus-circle
+                                    h5 Add Vehicle
+                    

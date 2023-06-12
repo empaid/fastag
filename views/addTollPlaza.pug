@@ -1,0 +1,38 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col-md-6.m-auto
+        .card
+            .card-body
+                a.btn.btn-warning.mb-4.btn-sm(href="/") 
+                    .i.fa.fa-long-arrow-left
+                    |  Back
+                include partials/messages.pug
+                form(action='/tollPlaza' method='POST')
+                    .d-grid.gap-2.mx-auto
+                        .form-floating
+                            input#plaza_name.form-control(
+                                type='name' 
+                                name='plaza_name' 
+                                placeholder='Enter Toll Plaza Name' 
+                                value = typeof(body.plaza_name) && body.plaza_name
+                            )
+                            label(for='plaza_name') Name   
+                        .form-floating
+                            input#city.form-control(
+                                type='name' 
+                                name='city' 
+                                placeholder='Enter City' 
+                                value = typeof(body.city) && body.city
+                            )
+                            label(for='city') City
+                        .form-floating
+                            input#state.form-control(
+                                type='name' 
+                                name='state' 
+                                placeholder='Enter State' 
+                                value = typeof(body.state) && body.state
+                            )
+                            label(for='state') State
+                        button.btn.btn-primary.btn-block(type='submit') Add Toll Plaza

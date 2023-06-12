@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col-md-6.m-auto
+        .card
+            .card-body
+                a.btn.btn-warning.mb-4.btn-sm(href="/") 
+                    .i.fa.fa-long-arrow-left
+                    |  Back
+                include partials/messages.pug
+                form(action='/manager' method='POST')
+                    .d-grid.gap-2.mx-auto
+                        .input-group.mb-3
+                            label.input-group-text(for='inputGroupSelect01') Toll Plaza
+                            select#inputGroupSelect01.disabled.form-select(name = 'toll_plaza_id')
+                                option(value='0', selected) Choose...
+                                if toll_plazas 
+                                    each toll_plaza in toll_plazas
+                                        option(value=toll_plaza.plaza_id) 
+                                            |   #{toll_plaza.name}, #{toll_plaza.city}, #{toll_plaza.state}
+                        #manager_present.alert.alert-danger(hidden)  Manager Already Present !!!
+                        #manager_not_present.alert.alert-success(hidden)  Manager Not Present !!!
+                        #manager_input.input-group.mb-3(hidden)
+                            label.input-group-text(for='manager_name') Manager Name
+                            input.form-control(disabled type='name' name='manager_name')
+                        #employee_list.input-group.mb-3(hidden)
+                            label.input-group-text(for='inputGroupSelect02') Employee List
+                            select#inputGroupSelect02.form-select(name = 'employee_id')
+                                option(value='0', selected) Choose...
+                        //- .form-floating
+                        //-     input#plaza_name.form-control(
+                        //-         type='name' 
+                        //-         name='plaza_name' 
+                        //-         placeholder='Enter Toll Plaza Name' 
+                        //-         value = typeof(body.plaza_name) && body.plaza_name
+                        //-     )
+                        button#submit-btn.btn.btn-primary.btn-block.disabled(type='submit') Assign Change Mananger
+    script(src="/javascript/changeManager.js") 

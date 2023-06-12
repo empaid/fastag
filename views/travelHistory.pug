@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    .row.mt-5
+      .col-md-6.m-auto
+        .card
+            .card-header.bg-primary.text-white
+                a.btn.btn-warning.btn-sm(href="/")   < Back
+                |     Travel History
+            .card-body
+                .d-grid.gap-2.mx-auto
+                    h1.card-title.text-captalize #{vehicle.colour} #{vehicle.brand} #{vehicle.model}
+                    h5.card-subtitle.text-muted
+                        if vehicle.vehicle_type == 'LMV' 
+                            | Light Motor Vehicle
+                        if vehicle.vehicle_type == 'LCV' 
+                            | Light Commercial Vehicle
+                        if vehicle.vehicle_type == 'HCV' 
+                            | Heavy Commercial Vehicle
+                    if travel_list.length
+                        table.table.table-bordered
+                            thead
+                                tr
+                                    th(scope='col') Date
+                                    th(scope='col') City 
+                                    th(scope='col') Payment Type
+                                    th(scope='col') Fine
+                                    th(scope='col') Total
+                            tbody
+                                each travel in travel_list
+                                    tr
+                                        - time = travel.visit_time.toLocaleString('en-IN', { timeStyle: "full", hour12: true});
+                                        td #{time}
+                                        td #{travel.city}
+                                        td #{travel.payment_type}
+                                        td 
+                                            if travel.fine_amount==0
+                                                | -
+                                            else
+                                                | #{travel.fine_amount}
+                                        th(scope='row') #{travel.total_amount}
+                    else    
+                        h4.text-primary Travel History Don't exit

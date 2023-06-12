@@ -1,0 +1,33 @@
+extends layout 
+
+block content-without-container
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        .container-fluid
+            a.navbar-brand(href='#')
+                img(src='./assests/logo.png' width='200')
+            .d-flex
+                .navbar-nav
+                    a.btn.btn-secondary(href='/users/logout') Logout
+    .py-5.text-center.container
+        include partials/messages.pug
+        .row
+            .col-lg-6.col-md-3.mx-auto
+                .div.text-primary
+                    .lead.text-capitalize #{user.plaza.name}
+                    div #{user.plaza.city}, #{user.plaza.state}
+                    .small Cash Holded: #{user.plaza.cash_holded}
+                    .small Online Funds: #{user.plaza.online_funds}
+                h2.fw-light.mt-5 Hello #{user.first_name} #{user.last_name} !!!!
+                ul.lead.list-unstyled.mt-3.mb-4.text-muted
+                    li Username: #{user.username}
+                    li Email: #{user.email}
+                    if user.driving_license_no
+                        li License Number: #{user.driving_license_no}
+                    if user.phone
+                        li Phone Number: #{user.phone}
+                .d-grid.gap-3.mx-auto
+                    a(class="btn btn-lg btn-primary btn-block", href="/employee") Add Employee
+                    a(class="btn btn-lg btn-primary btn-block", href="/tollBooth") Add Toll Booth
+                    a(class="btn btn-lg btn-primary btn-block", href="/tollBooth/operator/list") View Operators At Toll Booth
+            
+                    
